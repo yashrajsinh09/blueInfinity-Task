@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { giveResponse } = require("../helper/res_help");
-const CMS_user = require("../models/user");
+const User = require("../models/user");
 
 exports.auth = async (req, res, next) => {
   try {
@@ -12,7 +12,7 @@ exports.auth = async (req, res, next) => {
       if (decode == "undefined" || decode == null) {
         giveResponse(res, 403, false, "token is expired");
       } else {
-        const user = await CMS_user.findById(decode?.id);
+        const user = await User.findById(decode?.id);
 
         req.token = token;
         req.user = user;
